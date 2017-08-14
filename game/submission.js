@@ -1,5 +1,40 @@
 'use strict'; /*jslint node:true*/
 
+class Rat {
+    constructor(src) {
+        this.src = src;
+        this.point = src.player;
+        this.see = src.check_step;
+        this.route_1 = ""
+        this.route_2 = ""
+        this.chees = ""
+    }
+    console() {
+       console.log("Крыса вылупилась!!!");
+        this.src.log_player();
+
+        console.log("this.src.direction = ", this.src.direction);
+    }
+    look_exit() {
+        let clockwise        = 'rdlur', 
+            counterclockwise = 'ruldr';
+        let pass = this.direction;
+        
+
+        for (let i = 0; i < 10; i++ ) {
+            pass =  counterclockwise.indexOf (pass))
+        }    
+        
+        if (this.direction == 'r') {
+           let pass =  this.see('r', this.point);
+            if(!pass) (this.see('u', this.point) == 'u')
+        }
+    }
+
+    
+}
+
+
 class Screen {
     constructor(screen) {
         this.screen = screen.map(el => el.split(""));
@@ -87,7 +122,7 @@ class Screen {
 
        throw new Error ("ТУПИК!!! Выпускай крысу!!!");
 
-       return " "
+       return ""
         
     }
     check_step(direction, point = this.player) {
@@ -99,8 +134,16 @@ class Screen {
         let right   = ['r', 'd'],
             down    = ['d', 'l'],
             left    = ['l', 'u'],
-            up      = ['u', 'r'];        
+            up      = ['u', 'r']; 
+
+        console.log("Крыса на старте!!!")
+            
+        let rat = new Rat(this);  
+        
+        rat.console()
     }
+
+
     single_bypass(direction) {
 
         let brick           = this.udlr_to_xy(direction),
@@ -199,8 +242,9 @@ exports.play = function*(screen){
 
 
 
-if (0) {
 
+
+if (1) {
 const { cave } = require('./../cave') ;
 let screen = cave;
 
